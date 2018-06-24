@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+          <%- include('../partials/head') %>
+    </head>
+    <body>
+      <%- include('../partials/header') %>
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+
+            <h3>Sign In</h3>
+
+
+            <form action="/signin" method="post">
+
+              <div class="form-group">
+
+                <label for="email">Email</label>
+
+                <input class="form-control" type="email" name="email" placeholder="Email" value="">
+
+              </div>
+
+              <div class="form-group">
+
+                <label for="email">Password</label>
+
+                <input class="form-control" type="password" name="password" placeholder="Password">
+
+              </div>
+
+              <div class="form-group">
+
+                <button type="submit" class="form-control btn btn-primary">Sign in</button>
+
+              </div>
+
+              <div class="form-group">
+
+                <a class="form-control btn btn-success" href="#">Do not have an account yet! Click here</a>
+
+              </div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+      <%- include('../partials/scripts') %>
+    </body>
+</html>

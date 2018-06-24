@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var session = require('express-session');
 var logger = require('morgan');
 //connect mongoDB
@@ -18,6 +19,8 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Add body-bodyParser
+
 app.use(cookieParser());
 app.use(
   session({
@@ -45,12 +48,12 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   //development mode
-  //res.render(err.message);
+  res.render(err.message);
   // production mode
-  res.render('error/error', {
-    title: '404 Page Not Found',
-    home: process.env.BASE_URL
-  });
+  // res.render('error/error', {
+  //   title: '404 Page Not Found',
+  //   home: process.env.BASE_URL
+  // });
 });
 
 module.exports = app;
