@@ -1,0 +1,9 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW": "phd_shop123",
+    "MONGO_CONNECT_URI":
+      "mongodb+srv://shop:phd_shop123@cluster0-ixutd.mongodb.net/test?retryWrites=true",
+    "BASE_URL": "http://localhost:6069",
+    "JWT_KEY": "phd_shopMY_SCERET_KEY@(!!($"
+  }
+}
