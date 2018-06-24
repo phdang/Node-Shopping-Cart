@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var logger = require('morgan');
 //connect mongoDB
 const mongoose = require('mongoose');
@@ -18,6 +19,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  session({
+    secret: 'phd_shopping-cart',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: true }
+  })
+);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -35,6 +44,9 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+  //development mode
+  //res.render(err.message);
+  // production mode
   res.render('error/error', {
     title: '404 Page Not Found',
     home: process.env.BASE_URL
