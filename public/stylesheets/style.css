@@ -1,0 +1,28 @@
+.thumbnail .product-desc {
+  color: #757575;
+  height: 40px;
+  overflow: hidden;
+}
+
+.thumbnail .product-price {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.thumbnail > img {
+  height: 400px;
+  transition: all 0.5s ease-out;
+}
+.thumbnail > img:hover {
+  transform: scale(1.15);
+  transition: all 0.5s ease-in;
+}
+
+.thumbnail > .caption {
+  height: 190px;
+}
+.thumbnail > .caption > h3 {
+  font-size: 18px;
+  min-height: 50px;
+  overflow: hidden;
+}
