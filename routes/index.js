@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+const ProductController = require('../controllers/product');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Shopping Cart' });
-});
+router.get('/', ProductController.fetchProducts);
 
 module.exports = router;

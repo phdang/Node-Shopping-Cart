@@ -1,6 +1,6 @@
 <div class="row">
 
-  <% for (var i = 0; i < 6; i++) { %>
+  <% for (product of products) { %>
 
     <!-- Thumbnail Label -->
 
@@ -8,19 +8,19 @@
 
         <div class="thumbnail" title="">
 
-          <img class="img-responsive" src="http://ecx.images-amazon.com/images/I/51ZU%2BCvkTyL.jpg" alt="Harry Potter">
+          <img class="img-responsive" src="<%= product.img %>" alt="Harry Potter">
           <div class="caption">
 
-            <h3>  Harry Potter  </h3>
+            <h3> <%= product.title %>  </h3>
 
             <p class="product-desc">
-               Super cool - at least as a child.
+               <%= product.desc %>
             </p>
 
             <div class="clearfix">
 
               <p>
-                <p class="pull-left product-price">$12</p>
+                <p class="pull-left product-price">$<%= product.price %></p>
 
                 <a href="#" class="add-cart btn btn-success pull-right" role="button">Add to cart</a>
 

@@ -1,8 +1,8 @@
 {
   "env": {
-    "MONGO_ATLAS_PW": "phd_shop123",
+    "MONGO_ATLAS_PW": "phd_shopping-cart123",
     "MONGO_CONNECT_URI":
-      "mongodb+srv://shop:phd_shop123@cluster0-ixutd.mongodb.net/test?retryWrites=true",
+      "mongodb+srv://shopping-cart:phd_shopping-cart123@shopping-cart-fdlh7.mongodb.net/test?retryWrites=true",
     "BASE_URL": "http://localhost:6069",
     "JWT_KEY": "phd_shopMY_SCERET_KEY@(!!($"
   }

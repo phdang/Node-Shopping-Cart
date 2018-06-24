@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//connect mongoDB
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_CONNECT_URI);
 
 var indexRouter = require('./routes/index');
 
@@ -32,7 +35,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error', {
+  res.render('error/error', {
     title: '404 Page Not Found',
     home: process.env.BASE_URL
   });
