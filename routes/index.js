@@ -10,8 +10,12 @@ const AuthController = require('../controllers/auth');
 router.use(csrfProtection);
 /* GET home page. */
 router.get('/', ProductController.fetchProducts);
+// Authentication page
 router.get('/signup', AuthController.getSignup);
 router.post('/signup', parseForm, AuthController.postSignup);
 router.get('/signin', AuthController.getSignin);
-
+// User profile Page
+router.get('/user/profile', (req, res, next) => {
+  res.render('user/profile', { title: 'Profile' });
+});
 module.exports = router;

@@ -4,11 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var passport = require('passport');
+var flash = require('connect-flash');
 var logger = require('morgan');
 //connect mongoDB
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_CONNECT_URI);
-
+//config passport
+require('./config/passport');
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -17,19 +20,25 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 // Add body-bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
+// add session
 app.use(
   session({
     secret: 'phd_shopping-cart',
     resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true }
+    saveUninitialized: false
+    //remove cookie to enable flash
   })
 );
+// flash
+app.use(flash());
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

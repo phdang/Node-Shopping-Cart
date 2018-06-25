@@ -12,6 +12,20 @@
 
             <h3>Sign Up</h3>
 
+            <% if (messages.length > 0) { %>
+
+              <div class="alert alert-danger" role="alert">
+
+                <% for ( message of messages) { %>
+
+                  <p><%= message %></p>
+
+                <% } %>
+
+              </div>
+
+            <% } %>
+
             <form action="/signup" method="post">
 
               <div class="form-group">
