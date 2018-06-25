@@ -43,7 +43,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-
+// Set global variable for views templating engine
+app.use((req, res, next) => {
+  res.locals.isAuth = req.isAuthenticated();
+  next();
+});
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 

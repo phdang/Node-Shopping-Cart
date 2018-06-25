@@ -28,3 +28,7 @@ exports.postSignin = passport.authenticate('local.signin', {
   badRequestMessage: 'Email and password mube not be  empty',
   failureFlash: true
 });
+exports.getSignout = (req, res, next) => {
+  req.logout();
+  res.redirect('/');
+};

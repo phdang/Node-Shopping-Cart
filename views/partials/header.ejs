@@ -20,20 +20,22 @@
        </a>
      </li>
 
-       <!-- //User is not logged in -->
-
-
-       <li><a href="/signin"> Sign In</a></li>
-
-       <li><a href="/signup"> Sign Up</a></li>
+       <% if (isAuth) { %>
 
        <!-- //User is logged in -->
 
-
         <li><a href="/user/profile"><i class="fas fa-user"></i> Account</a></li>
 
-        <li><a href="#">Log out</a></li>
+        <li><a href="/signout">Log out</a></li>
 
+        <% } else { %>
+
+          <!-- //User is not logged in -->
+          <li><a href="/signin"> Sign In</a></li>
+
+          <li><a href="/signup"> Sign Up</a></li>
+
+        <% } %>
 
       </ul>
 
