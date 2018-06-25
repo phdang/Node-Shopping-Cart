@@ -47,3 +47,26 @@ passport.use(
     }
   )
 );
+passport.use(
+  'local.signin',
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+      passReqToCallback: true
+    },
+    (req, email, password, done) => {
+      User.findOne({ email: email }, (err, user) => {
+        if (err) {
+          return done(err);
+        }
+        //Validations
+        require('../utilities/signin-validation')(req, user, password, done);
+        if (req.flash('error').length === 0) {
+          // means no error occurs then redirect to sign in
+          return done(null, user);
+        }
+      });
+    }
+  )
+);

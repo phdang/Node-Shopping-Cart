@@ -14,8 +14,6 @@ router.get('/', ProductController.fetchProducts);
 router.get('/signup', AuthController.getSignup);
 router.post('/signup', parseForm, AuthController.postSignup);
 router.get('/signin', AuthController.getSignin);
-// User profile Page
-router.get('/user/profile', (req, res, next) => {
-  res.render('user/profile', { title: 'Profile' });
-});
+router.post('/signin', parseForm, AuthController.postSignin);
+
 module.exports = router;

@@ -12,6 +12,20 @@
 
             <h3>Sign In</h3>
 
+            <% if (messages.length > 0) { %>
+
+              <div class="alert alert-danger" role="alert">
+
+                <% for ( message of messages) { %>
+
+                  <p><%= message %></p>
+
+                <% } %>
+
+              </div>
+
+            <% } %>
+
 
             <form action="/signin" method="post">
 
@@ -39,7 +53,7 @@
 
               <div class="form-group">
 
-                <a class="form-control btn btn-success" href="#">Do not have an account yet! Click here</a>
+                <a class="form-control btn btn-success" href="/signup">Do not have an account yet! Click here</a>
 
               </div>
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">

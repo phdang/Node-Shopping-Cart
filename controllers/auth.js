@@ -11,8 +11,20 @@ exports.getSignup = (req, res, next) => {
 exports.postSignup = passport.authenticate('local.signup', {
   successRedirect: '/user/profile',
   failureRedirect: '/signup',
+  badRequestMessage: 'Email and password mube not be  empty',
   failureFlash: true
 });
 exports.getSignin = (req, res, next) => {
-  res.render('auth/signin', { title: 'Sign In', csrfToken: req.csrfToken() });
+  const messages = req.flash('error');
+  res.render('auth/signin', {
+    title: 'Sign In',
+    csrfToken: req.csrfToken(),
+    messages: messages
+  });
 };
+exports.postSignin = passport.authenticate('local.signin', {
+  successRedirect: '/user/profile',
+  failureRedirect: '/signin',
+  badRequestMessage: 'Email and password mube not be  empty',
+  failureFlash: true
+});
