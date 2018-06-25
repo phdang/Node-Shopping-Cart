@@ -3,18 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var validator = require('express-validator');
 var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+var validator = require('express-validator');
 var passport = require('passport');
 var flash = require('connect-flash');
 var logger = require('morgan');
-//connect mongoDB
+
 const mongoose = require('mongoose');
+//connect mongoDB
 mongoose.connect(process.env.MONGO_CONNECT_URI);
 //config passport
 require('./config/passport');
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
+var cartRouter = require('./routes/cart');
 var app = express();
 
 // view engine setup
@@ -34,22 +37,29 @@ app.use(
     secret: 'phd_shopping-cart',
     resave: false,
     saveUninitialized: false
-    //remove cookie to enable flash
   })
 );
+app.use(function(req, res, next) {
+  req.session.cookie.maxAge = 180 * 60 * 1000; // 3 hours
+  next();
+});
+
 // flash
 app.use(flash());
 //passport
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Set global variable for views templating engine
 app.use((req, res, next) => {
   res.locals.isAuth = req.isAuthenticated();
+  res.locals.session = req.session;
   next();
 });
 app.use('/', indexRouter);
 app.use('/user', userRouter);
+app.use('/cart', cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

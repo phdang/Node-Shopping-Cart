@@ -7,7 +7,8 @@ var express = require('express');
 var router = express.Router();
 const redirectIfAuth = require('../middleware/redirectIfAuthenticated');
 const isAuthenticated = require('../middleware/authenticated');
-
+const Cart = require('../models/cart');
+const Product = require('../models/product');
 const ProductController = require('../controllers/product');
 const AuthController = require('../controllers/auth');
 router.use(csrfProtection);
@@ -19,4 +20,15 @@ router.post('/signup', redirectIfAuth, parseForm, AuthController.postSignup);
 router.get('/signin', redirectIfAuth, AuthController.getSignin);
 router.post('/signin', redirectIfAuth, parseForm, AuthController.postSignin);
 router.get('/signout', isAuthenticated, AuthController.getSignout);
+// Add cart
+router.get('/addCart/:id', (req, res, next) => {
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart.items : {});
+
+  Product.findById(productId, function(err, product) {
+    cart.add(product, product.id);
+    req.session.cart = cart;
+    res.redirect('/');
+  });
+});
 module.exports = router;
