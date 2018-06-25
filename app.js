@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var validator = require('express-validator');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
@@ -23,6 +24,8 @@ app.use(logger('dev'));
 // Add body-bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// Add validation
+app.use(validator());
 
 app.use(cookieParser());
 // add session

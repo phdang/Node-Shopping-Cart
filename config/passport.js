@@ -28,36 +28,21 @@ passport.use(
         if (err) {
           return done(err);
         }
-        //validation
-        if (user) {
-          return done(null, false, { message: 'Email is already taken' });
-        }
-        if (req.body.name.length === 0 || req.body.name.length > 50) {
-          return done(null, false, {
-            message: 'Name should not be empty or exceed 50 characters'
+        // Validation
+        require('../utilities/signup-validation')(req, user, done);
+        if (req.flash('error').length === 0) {
+          // means no error occurs then save to database
+          var newUser = new User();
+          newUser.email = email;
+          newUser.password = newUser.encryptPassword(password);
+          newUser.name = req.body.name;
+          newUser.save(function(err, result) {
+            if (err) {
+              return done(err);
+            }
+            return done(null, newUser);
           });
         }
-        if (req.body.password.length < 6) {
-          return done(null, false, {
-            message: 'Password must be at least 6 characters'
-          });
-        }
-        if (req.body.password !== req.body.confirmPassword) {
-          return done(null, false, {
-            message: 'Password does not match the confirm password'
-          });
-        }
-
-        var newUser = new User();
-        newUser.email = email;
-        newUser.password = newUser.encryptPassword(password);
-        newUser.name = req.body.name;
-        newUser.save(function(err, result) {
-          if (err) {
-            return done(err);
-          }
-          return done(null, newUser);
-        });
       });
     }
   )

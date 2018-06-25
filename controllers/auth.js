@@ -2,7 +2,6 @@ var passport = require('passport');
 
 exports.getSignup = (req, res, next) => {
   const messages = req.flash('error');
-  console.log(messages);
   res.render('auth/signup', {
     title: 'Sign Up',
     csrfToken: req.csrfToken(),
