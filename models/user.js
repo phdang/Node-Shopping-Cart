@@ -8,6 +8,7 @@ const userSchema = new Schema({
     required: true,
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   },
+  isAdmin: { type: Boolean, default: false },
   password: { type: String, required: true }
 });
 userSchema.methods.encryptPassword = function(password) {

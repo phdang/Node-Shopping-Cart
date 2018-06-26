@@ -9,16 +9,19 @@ const redirectIfAuth = require('../middleware/redirectIfAuthenticated');
 const isAuthenticated = require('../middleware/authenticated');
 const ProductController = require('../controllers/product');
 const AuthController = require('../controllers/auth');
-router.use(csrfProtection);
-/* GET home page. */
-router.get('/', ProductController.fetchProducts);
-// Add cart
-router.post('/addCart', ProductController.addCart);
 // Authentication page
-router.get('/signup', redirectIfAuth, AuthController.getSignup);
-router.post('/signup', redirectIfAuth, parseForm, AuthController.postSignup);
-router.get('/signin', redirectIfAuth, AuthController.getSignin);
-router.post('/signin', redirectIfAuth, parseForm, AuthController.postSignin);
-router.get('/signout', isAuthenticated, AuthController.getSignout);
-
+router.get('/signup', redirectIfAuth, AuthController.getAdminSignup);
+router.post(
+  '/signup',
+  redirectIfAuth,
+  parseForm,
+  AuthController.postAdminSignup
+);
+router.get('/signin', redirectIfAuth, AuthController.getAdminSignin);
+router.post(
+  '/signin',
+  redirectIfAuth,
+  parseForm,
+  AuthController.postAdminSignin
+);
 module.exports = router;

@@ -66,7 +66,7 @@
             <div class="cart-subtotal-price">
 
               <a class="cart-view pull-left continue-shopping" href="/"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Continue shopping</a>
-              <a class="btn btn-success" href="#">Checkout</a>
+              <a class="btn btn-success" href="/cart/checkout">Checkout</a>
 
               <span id="total-price" class="pull-right"> <%= session.cart ? session.cart.totalPrice > 0 ? 'Total price: $' + session.cart.totalPrice.toFixed(2) : 'No items in your cart yet' : 'No items in your cart yet' %></span>
 

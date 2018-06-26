@@ -17,7 +17,9 @@ mongoose.connect(process.env.MONGO_CONNECT_URI);
 require('./config/passport');
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
+var adminRouter = require('./routes/admin');
 var cartRouter = require('./routes/cart');
+
 var app = express();
 
 // view engine setup
@@ -55,10 +57,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   res.locals.isAuth = req.isAuthenticated();
   res.locals.session = req.session;
+  res.locals.auth = req.session.auth;
   next();
 });
 app.use('/', indexRouter);
 app.use('/user', userRouter);
+app.use('/admin', adminRouter);
 app.use('/cart', cartRouter);
 
 // catch 404 and forward to error handler
