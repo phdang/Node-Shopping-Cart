@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
           <%- include('../partials/head') %>
+          <link href="/stylesheets/payment.css" rel="stylesheets">
     </head>
     <body>
       <%- include('../partials/header') %>
@@ -10,65 +11,75 @@
                 <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
                     <h1>Checkout</h1>
                     <h4>Your Total: $<%= session.cart.totalPrice.toFixed(2) %></h4>
-                    <div id="charge-error" class="alert alert-danger">
+                    <div id="charge-error" class="alert">
 
                     </div>
-                    <form action="" method="post" id="checkout-form">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" id="name" class="form-control" value="<%= auth.name %>" required>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" name="address" id="address" class="form-control" required>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="card-name">Card Holder Name</label>
-                                    <input type="text" id="card-name" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="card-number">Credit Card Number</label>
-                                    <input type="text" id="card-number" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label for="card-expiry-month">Expiration Month</label>
-                                            <input type="text" id="card-expiry-month" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="form-group">
-                                            <label for="card-expiry-year">Expiration Year</label>
-                                            <input type="text" id="card-expiry-year" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="card-cvc">CVC</label>
-                                    <input type="text" id="card-cvc" class="form-control" required>
-                                </div>
-                            </div>
+                    <form action="/cart/charge" method="post" id="payment-form">
+                      <div class="form-row">
+                        <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
                         </div>
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button type="submit" class="btn btn-success">Buy now</button>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="card-name">Card Holder Name</label>
+                            <input type="text" id="card-name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" name="address" id="address" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" name="country" id="country" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" name="mobile" id="mobile" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                        <label for="card-element">
+                          Credit or debit card
+                        </label>
+                        <div id="card-element">
+                          <!-- A Stripe Element will be inserted here. -->
+                        </div>
+
+
+                        <!-- Used to display form errors. -->
+                        <div id="card-errors" role="alert"></div>
+                      </div>
+                    </div>
+                      </div>
+                      <div class="col-xs-12">
+
+                      <div class="form-group">
+                      <input class="form-controls" type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    </div>
+                  </div>
+                      <button type="submit" class="btn btn-success">Buy now</button>
                     </form>
                 </div>
             </div>
       </div>
       <%- include('../partials/scripts') %>
+
+
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="/javascripts/cart.js"></script>
+
     </body>
 </html>

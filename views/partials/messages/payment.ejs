@@ -1,0 +1,7 @@
+<% if (messages.length > 0) {
+  for (message of messages) {
+    if (messageType) { %>
+      <div id="success-payment" class="alert alert-success"><%= message %></div>
+    <%} else { %>
+      <div id="error-payment" class="alert alert-error"><%= message %></div>
+<% }}} %>

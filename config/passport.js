@@ -41,6 +41,7 @@ passport.use(
               return done(err);
             }
             req.session.auth = {
+              id: newUser._id,
               email: req.body.email,
               name: req.body.name,
               isAdmin: false
@@ -79,6 +80,7 @@ passport.use(
               return done(err);
             }
             req.session.auth = {
+              id: newUser._id,
               email: req.body.email,
               name: req.body.name,
               isAdmin: true
@@ -108,6 +110,7 @@ passport.use(
         if (req.flash('error').length === 0) {
           // means no error occurs then redirect to sign in
           req.session.auth = {
+            id: user._id,
             email: user.email,
             name: user.name,
             isAdmin: user.isAdmin
@@ -137,6 +140,7 @@ passport.use(
         if (req.flash('error').length === 0) {
           // means no error occurs then redirect to sign in
           req.session.auth = {
+            id: user._id,
             email: user.email,
             name: user.name,
             isAdmin: user.isAdmin

@@ -11,6 +11,12 @@ router.get(
   isCartEmpty,
   CartController.getCheckout
 );
+router.post(
+  '/charge',
+  isAuthenticated,
+  isCartEmpty,
+  CartController.postCheckout
+);
 
 // router.get('/test', CartController.getTest);
 module.exports = router;

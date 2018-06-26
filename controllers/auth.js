@@ -19,7 +19,6 @@ exports.getAdminSignup = (req, res, next) => {
   });
 };
 exports.postSignup = passport.authenticate('local.signup', {
-  successRedirect: '/user/profile',
   failureRedirect: '/signup',
   badRequestMessage: 'Email and password mube not be  empty',
   failureFlash: true
@@ -43,7 +42,6 @@ exports.getAdminSignin = (req, res, next) => {
   });
 };
 exports.postSignin = passport.authenticate('local.signin', {
-  successRedirect: '/user/profile',
   failureRedirect: '/signin',
   badRequestMessage: 'Email and password mube not be  empty',
   failureFlash: true

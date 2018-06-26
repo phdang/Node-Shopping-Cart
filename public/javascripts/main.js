@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  $('#success-payment').fadeOut(6000);
+  $('#error-payment').fadeOut(6000);
   $('.add-cart').on('click', function(event) {
     event.preventDefault();
     const productId = event.target.dataset['productid'];
