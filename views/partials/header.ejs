@@ -16,11 +16,14 @@
        <li>
          <a href="/cart/view">
            <i class="fas fa-shopping-cart"></i> Shopping Cart
+           <span id="items-to-cart" class="<%= session.cart ? 'badge' : '' %>">
+
            <% if (session.cart) { %>
-           <span class="badge">
                 <%= Object.keys(session.cart.items).length %>
-           </span>
            <% } %>
+
+         </span>
+
        </a>
      </li>
 

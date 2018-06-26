@@ -6,7 +6,7 @@ router.get('/view', (req, res, next) => {
   res.render('cart/view', { title: 'Cart' });
 });
 
-// router.get('/test', (req, res, next) => {
-//   res.status(200).send({ cart: req.session.cart });
-// });
+router.get('/test', (req, res, next) => {
+  res.status(200).json({ cart: req.session.cart });
+});
 module.exports = router;

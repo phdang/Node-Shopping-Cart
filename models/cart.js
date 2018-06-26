@@ -17,9 +17,7 @@ module.exports = function Cart(initItems) {
       storedItem = this.items[id] = { qty: 0, item: item, price: 0 };
     }
     storedItem.qty++;
-    storedItem.price = parseFloat(
-      (storedItem.item.price * storedItem.qty).toFixed(2)
-    );
+    storedItem.price = storedItem.item.price * storedItem.qty;
     this.totalQty++;
     this.totalPrice += storedItem.price;
   };
