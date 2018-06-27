@@ -1,4 +1,4 @@
-var stripe = require('stripe')('sk_test_4zZ9eddyg1n23zaJKP2tjhIY');
+var stripe = require('stripe')(process.env.STRIPE_KEY);
 const Order = require('../models/order');
 exports.getCartView = (req, res, next) => {
   res.render('cart/view', { title: 'Cart' });
@@ -14,7 +14,7 @@ exports.getTest = (req, res, next) => {
 };
 exports.postCheckout = async (req, res) => {
   const charge = await stripe.charges.create({
-    amount: Number(req.session.cart.totalPrice.toFixed(2)) * 100,
+    amount: parseInt(Number(req.session.cart.totalPrice.toFixed(2)) * 100),
     currency: 'usd',
     source: req.body.stripeToken, // obtained with Stripe.js
     description:
@@ -33,6 +33,7 @@ exports.postCheckout = async (req, res) => {
       mobile: req.body.mobile,
       cart: JSON.stringify(req.session.cart),
       charge: charge.id,
+      purchasedAt: new Date().toLocaleString(),
       _user: req.session.auth.id
     });
     const result = await order.save();

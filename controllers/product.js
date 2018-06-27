@@ -15,10 +15,33 @@ exports.fetchProducts = async function(req, res, next) {
 };
 exports.addCart = (req, res, next) => {
   var productId = req.body.productId;
-  var cart = new Cart(req.session.cart ? req.session.cart.items : {});
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
   Product.findById(productId, function(err, product) {
+    if (err) {
+      return res.status(404).send({ message: 'Product Not Found' });
+    }
     cart.add(product, product.id);
     req.session.cart = cart;
-    res.status(200).send({ count: Object.keys(cart.items).length });
+    //console.log(req.session.cart);
+    res.json({ count: Object.keys(cart.items).length });
+  });
+};
+exports.removeItems = (req, res, next) => {
+  var productId = req.params.productId;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  Product.findById(productId, function(err, product) {
+    if (err) {
+      return res.redirect('/cart/view');
+    }
+    cart.removeItem(product.id);
+    if (cart.totalQty) {
+      req.session.cart = cart;
+    } else {
+      //no item left destroy session cart
+      req.session.cart = null;
+    }
+
+    //console.log(req.session.cart);
+    return res.redirect('/cart/view');
   });
 };

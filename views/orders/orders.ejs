@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <%- include('../partials/header') %>
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm-12 col-md-8 col-md-offset-2">
+
+          <h3>My Orders</h3>
+
+          <hr>
+          <% if( carts.length === 0) { %>
+
+
+          <h4> You don't have any orders yet!</h4>
+          <%  }%>
+
+          <% for (cart of carts) { %>
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <ul class="list-group">
+
+
+                <% for (key of Object.keys(cart.items)) { %>
+
+                <li class="list-group-item">
+                  <span class="badge">$<%= cart.items[key].item.price * cart.items[key].qty %></span> <%= cart.items[key].item.title %> | Qty: <%= cart.items[key].qty %>
+                </li>
+
+                <% } %>
+                <li class="list-group-item">
+
+                  <h4>Total Price: $<%= cart.totalPrice.toFixed(2) %></h4>
+
+                  <p><strong><em>Purchased at </em></strong><em><%=cart.purchasedAt%></em></p>
+
+                </li>
+
+
+              </ul>
+            </div>
+          </div>
+
+          <% } %>
+
+        </div>
+
+      </div>
+
+    </div>
+    <%- include('../partials/scripts') %>
+</body>
+
+</html>

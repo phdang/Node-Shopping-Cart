@@ -42,7 +42,7 @@
 
                 <tr class="grey">
 
-                  <td class="text-center"><a title="Remove item from cart" href="#"><img src="/images/delete.gif" alt="delete"></a></td>
+                  <td class="text-center"><a title="Remove item from cart" href="/removeProduct/<%= session.cart.items[key].item._id %>"><img src="/images/delete.gif" alt="delete"></a></td>
 
                   <td align="center">
                     <img class="cart-item-img" src="<%= session.cart.items[key].item.img %>" alt="delete">

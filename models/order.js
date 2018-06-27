@@ -7,6 +7,7 @@ const orderSchema = new Schema({
   mobile: { type: String },
   cart: { type: String, required: true },
   charge: { type: String, required: true },
+  purchasedAt: { type: String, default: new Date().toLocaleString() },
   _user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 module.exports = mongoose.model('Order', orderSchema);

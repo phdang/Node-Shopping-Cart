@@ -16,6 +16,8 @@ router.use(csrfProtection);
 router.get('/', ProductController.fetchProducts);
 // Add cart
 router.post('/addCart', ProductController.addCart);
+//remove Iems
+router.get('/removeProduct/:productId', ProductController.removeItems);
 // Authentication page
 router.get('/signup', redirectIfAuth, AuthController.getSignup);
 router.post(
