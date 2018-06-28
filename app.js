@@ -19,6 +19,7 @@ var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 var cartRouter = require('./routes/cart');
+var productRouter = require('./routes/product');
 
 var app = express();
 
@@ -64,6 +65,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 app.use('/cart', cartRouter);
+app.use('/product', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -79,12 +81,13 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   //development mode
-  res.render(err.message);
+  //res.render(err.message);
   // production mode
-  // res.render('error/error', {
-  //   title: '404 Page Not Found',
-  //   home: process.env.BASE_URL
-  // });
+  res.render('partials/messages/error', {
+    title: 'Page Not Found',
+    desc: err.message,
+    home: process.env.BASE_URL
+  });
 });
 
 module.exports = app;

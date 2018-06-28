@@ -4,7 +4,7 @@ $(document).ready(function() {
   $('.add-cart').on('click', function(event) {
     event.preventDefault();
     const productId = event.target.dataset['productid'];
-    const addCartUrl = '/addCart';
+    const addCartUrl = 'product/addCart';
     const isEmptyCart =
       $('#items-to-cart')
         .text()

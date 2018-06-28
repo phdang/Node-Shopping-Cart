@@ -1,7 +1,7 @@
 var stripe = require('stripe')(process.env.STRIPE_KEY);
 const Order = require('../models/order');
 exports.getCartView = (req, res, next) => {
-  res.render('cart/view', { title: 'Cart' });
+  res.render('cart/view', { title: 'Cart', csrfToken: req.csrfToken() });
 };
 exports.getCheckout = (req, res, next) => {
   res.render('cart/checkout', {

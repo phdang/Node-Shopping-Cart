@@ -14,11 +14,12 @@ module.exports = function Cart(oldCart) {
     this.totalPrice += storedItem.item.price;
   };
 
-  this.reduceByOne = function(id) {
-    this.items[id].qty--;
-    this.items[id].price -= this.items[id].item.price;
-    this.totalQty--;
-    this.totalPrice -= this.items[id].item.price;
+  this.update = function(id, qty) {
+    updateQty = qty - this.items[id].qty;
+    this.items[id].qty += updateQty;
+    this.items[id].price += this.items[id].item.price * updateQty;
+    this.totalQty += updateQty;
+    this.totalPrice += this.items[id].item.price * updateQty;
 
     if (this.items[id].qty <= 0) {
       delete this.items[id];

@@ -45,3 +45,22 @@ exports.removeItems = (req, res, next) => {
     return res.redirect('/cart/view');
   });
 };
+exports.updateItems = (req, res, next) => {
+  var productId = req.body.productId;
+  var qty = req.body.qty ? parseInt(req.body.qty) : 1;
+
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  Product.findById(productId, function(err, product) {
+    if (err) {
+      return res.status(404).json({ message: 'Product Not Found' });
+    }
+    cart.update(productId, qty);
+    req.session.cart = cart;
+    res.status(200).json({
+      price: (
+        cart.items[productId].item.price * cart.items[productId].qty
+      ).toFixed(2),
+      totalPrice: cart.totalPrice.toFixed(2)
+    });
+  });
+};
