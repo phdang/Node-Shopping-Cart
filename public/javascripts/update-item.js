@@ -13,7 +13,7 @@ $(document).ready(function() {
     var itemId = event.target.dataset['itemid'];
     const updateItemUrl = '/product/update';
     $.ajax({
-      method: 'POST',
+      method: 'PATCH',
       url: updateItemUrl,
       data: {
         _csrf: csrfToken,

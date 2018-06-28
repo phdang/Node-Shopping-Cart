@@ -7,5 +7,5 @@ router.post('/addCart', ProductController.addCart);
 //remove Iems
 router.get('/remove/:productId', ProductController.removeItems);
 //update Iems
-router.post('/update', ProductController.updateItems);
+router.patch('/update', ProductController.updateItems);
 module.exports = router;
