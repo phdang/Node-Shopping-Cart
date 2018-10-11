@@ -1,11 +1,12 @@
-var stripe = require('stripe')(process.env.STRIPE_KEY);
-const Order = require('../models/order');
+const process = require("../config/env");
+var stripe = require("stripe")(process.env.STRIPE_KEY);
+const Order = require("../models/order");
 exports.getCartView = (req, res, next) => {
-  res.render('cart/view', { title: 'Cart', csrfToken: req.csrfToken() });
+  res.render("cart/view", { title: "Cart", csrfToken: req.csrfToken() });
 };
 exports.getCheckout = (req, res, next) => {
-  res.render('cart/checkout', {
-    title: 'Checkout',
+  res.render("cart/checkout", {
+    title: "Checkout",
     csrfToken: req.csrfToken()
   });
 };
@@ -15,14 +16,14 @@ exports.getTest = (req, res, next) => {
 exports.postCheckout = async (req, res) => {
   const charge = await stripe.charges.create({
     amount: parseInt(Number(req.session.cart.totalPrice.toFixed(2)) * 100),
-    currency: 'usd',
+    currency: "usd",
     source: req.body.stripeToken, // obtained with Stripe.js
     description:
-      'Name: ' +
+      "Name: " +
       req.body.name +
-      ' Address: ' +
+      " Address: " +
       req.body.address +
-      ' mobile: ' +
+      " mobile: " +
       req.body.mobile
   });
   if (charge) {
@@ -39,14 +40,14 @@ exports.postCheckout = async (req, res) => {
     const result = await order.save();
     if (result) {
       req.session.cart = null;
-      req.flash('payment', 'Payment Successful');
-      req.flash('messageType', true);
-      res.redirect('/');
+      req.flash("payment", "Payment Successful");
+      req.flash("messageType", true);
+      res.redirect("/");
     } else {
-      req.flash('payment', 'An Error Occurs Payment Failed');
-      req.flash('messageType', false);
+      req.flash("payment", "An Error Occurs Payment Failed");
+      req.flash("messageType", false);
 
-      res.redirect('/cart/checkout');
+      res.redirect("/cart/checkout");
     }
   }
 };
